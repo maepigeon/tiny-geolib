@@ -1,0 +1,9 @@
+/Makefile
+/build/*
+/.vscode/*
+/CMakeCache.txt
+/CMakeFiles/*
+/tests/*
+/cmake_install.cmake
+.DS_Store%   
+
