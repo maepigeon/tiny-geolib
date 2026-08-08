@@ -3,6 +3,7 @@
 #include <utility>
 #include <cstdio>
 #include "glm/glm.hpp"
+#include <iostream>
 
 namespace tinyGeo {
     // Return false if the HalfEdge is on the boundary
@@ -28,32 +29,34 @@ namespace tinyGeo {
         return glm::dot(v2v0, v2v1) / glm::length(glm::cross(v2v0, v2v1));
     }
 
-    void initializeIntrinsicLengths(HalfEdgeMesh& he) {
-        for (int h = 0; h < he.halfEdges.size(); h++) {
-            int origin = he.halfEdges[h].origin;
-            int dest = he.halfEdges[he.halfEdges[h].next].origin;
-            he.halfEdges[h].length = glm::length(he.positions[dest] - he.positions[origin]);
+    void calculateEdgeLengths(HalfEdgeMesh& he) {
+        for (int i = 0; i < he.halfEdges.size(); i++) {
+            int origin = he.halfEdges[i].origin;
+            int endPoint = he.halfEdges[he.halfEdges[i].next].origin;
+            he.halfEdges[i].length = glm::length(he.positions[endPoint] - he.positions[origin]);
         }
     }
     HalfEdgeMesh buildHalfEdgeMesh(Mesh mesh) {
         HalfEdgeMesh he;
         he.positions.reserve(mesh.vertices.size());
+        he.vertexToHE.assign(mesh.vertices.size(), -1);
         for (int i = 0; i < mesh.vertices.size(); i++) {
-            he.vertexToHE.assign(mesh.vertices.size(), -1);
             he.positions.push_back(mesh.vertices[i].position);
         }
         int triCount = mesh.indices.size() / 3;
         he.halfEdges.reserve(triCount * 3);
         he.faceToHE.reserve(triCount);
-        std::map<std::pair<int,int>, int> edgeMap; // create 3 half-edges per triangle, wire next/origin/face
+
+        // create 3 half-edges per triangle
+        std::map<std::pair<int,int>, int> edgeMap;
         for (int f = 0; f < triCount; f++) {
-            int v0 = mesh.indices[f*3 + 0];
-            int v1 = mesh.indices[f*3 + 1];
-            int v2 = mesh.indices[f*3 + 2];
+            int v0 = mesh.indices[f * 3 + 0];
+            int v1 = mesh.indices[f * 3 + 1];
+            int v2 = mesh.indices[f * 3 + 2];
             int base = he.halfEdges.size();
-            HalfEdge h0 = { v0, f, base + 1, -1 };
-            HalfEdge h1 = { v1, f, base + 2, -1 };
-            HalfEdge h2 = { v2, f, base + 0, -1 };
+            HalfEdge h0 = { v0, -1, base + 1, f }; // origin, twin, next, face
+            HalfEdge h1 = { v1, -1, base + 2, f };
+            HalfEdge h2 = { v2, -1, base + 0, f };
             he.halfEdges.push_back(h0);
             he.halfEdges.push_back(h1);
             he.halfEdges.push_back(h2);
@@ -67,28 +70,29 @@ namespace tinyGeo {
             if (he.vertexToHE[v2] < 0) {
                 he.vertexToHE[v2] = base + 2;
             }
-            int va[3] = { v0, v1, v2 };
-            int vb[3] = { v1, v2, v0 };
-            for (int k = 0; k < 3; k++) {
-                std::pair<int,int> key = { va[k], vb[k] };
-                if (edgeMap.count(key)) { // duplicate direction: non-manifold
+            int startPoints[3] = { v0, v1, v2 };
+            int endPoints[3] = { v1, v2, v0 };
+            for (int v = 0; v < 3; v++) {
+                std::pair<int,int> newEdge = { startPoints[v], endPoints[v] };
+                if (edgeMap.count(newEdge) > 0) {
                     he.isNonManifold = true;
-                    std::printf("Duplicate directed edge: %d->%d\n", va[k], vb[k]);
+                    std::cout << "Duplicate directed edge: " << startPoints[v] << ", " << endPoints[v] << std::endl;
                 }
-                edgeMap[key] = base + k;
+                edgeMap[newEdge] = base + v;
         }}
-        for (int i = 0; i < he.halfEdges.size(); i++) { // pair twins by looking up the reverse edge
+        // pair twins by looking up the reverse edge
+        for (int i = 0; i < he.halfEdges.size(); i++) { 
             int origin = he.halfEdges[i].origin;
-            int dest = he.halfEdges[he.halfEdges[i].next].origin; 
-            std::pair<int,int> reverse = { dest, origin };
+            int endPoint = he.halfEdges[he.halfEdges[i].next].origin; 
+            std::pair<int,int> reverse = { endPoint, origin };
             if (edgeMap.count(reverse)) {
-                he.halfEdges[i].twin = edgeMap[reverse]; // no reverse found => boundary edge
+                he.halfEdges[i].twin = edgeMap[reverse];
             }
         }
         return he;
     }
 
-    void buildVertexToHE(HalfEdgeMesh& mesh) {
+    void buildVertexToHEvector(HalfEdgeMesh& mesh) {
         mesh.vertexToHE.assign(mesh.positions.size(), -1);
         for (int i = 0; i < mesh.halfEdges.size(); i++) {
             int v = mesh.halfEdges[i].origin;

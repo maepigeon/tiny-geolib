@@ -54,7 +54,7 @@ namespace tinyGeo {
     
     //Computes the barycentric dual area of a vertex.
     float barycentricDualArea(HalfEdgeMesh mesh, int vertexHalfEdgeIndex) {
-        buildVertexToHE(mesh);
+        buildVertexToHEvector(mesh);
         std::vector<int> outgoing = outgoingHalfEdges(mesh, vertexHalfEdgeIndex);
         // One third of the summed area of triangles touching he's start-vertex
         double sumOfAreas = 0;

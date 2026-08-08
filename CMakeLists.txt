@@ -23,10 +23,8 @@ set(SOURCES
     src/DiffGeo.cpp
     src/IntrinsicDelaunay.cpp
 )
+
 add_library(${ProjectName} STATIC ${SOURCES})
 target_compile_features(${ProjectName} PUBLIC cxx_std_23)
 target_link_libraries(${ProjectName} PUBLIC glm::glm)
-target_include_directories(${ProjectName}
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
+target_include_directories(${ProjectName} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)

@@ -21,9 +21,9 @@ namespace tinyGeo {
         bool isNonManifold = false;
         int heOfFace(int f) { return faceToHE[f]; } // the three half-edges of a triangle, in order
     };
-    void initializeIntrinsicLengths(HalfEdgeMesh& he);
+    void calculateEdgeLengths(HalfEdgeMesh& he);
     HalfEdgeMesh buildHalfEdgeMesh(Mesh mesh);
-    void buildVertexToHE(HalfEdgeMesh& mesh);
+    void buildVertexToHEvector(HalfEdgeMesh& mesh);
     Mesh toMesh(HalfEdgeMesh he);
     float cotan(HalfEdgeMesh& mesh, int he);
     bool isInterior(HalfEdgeMesh& mesh, int he);
