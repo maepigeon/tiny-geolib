@@ -1,5 +1,25 @@
 #include "Mesh.hpp"
+#include <map>
+#include <tuple>
+#include <cmath>
+#include "glm/glm.hpp"
+
 namespace tinyGeo {
+    Mesh meshFromIndexed(std::vector<glm::vec3> positions, std::vector<glm::ivec3> faces) {
+        Mesh mesh;
+        mesh.vertices.reserve(positions.size());
+        for (glm::vec3 p : positions) {
+            mesh.vertices.push_back({p, p, glm::vec2(0.f)});
+        }
+        mesh.indices.reserve(faces.size() * 3);
+        for (glm::ivec3 f : faces) {
+            mesh.indices.push_back(f.x);
+            mesh.indices.push_back(f.y);
+            mesh.indices.push_back(f.z);
+        }
+        return mesh;
+    }
+
     void Mesh::computeNormals() {
         for (Vertex& v : vertices) {
             v.normal = glm::vec3(0.0f);

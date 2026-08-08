@@ -20,6 +20,7 @@ namespace tinyGeo {
             vertices.clear();
             indices.clear();
         }
+        Mesh meshFromIndexed(std::vector<glm::vec3> positions, std::vector<glm::ivec3> faces) ;
         void computeNormals();
     };
 } 
