@@ -5,7 +5,7 @@
 #include "glm/glm.hpp"
 
 namespace tinyGeo {
-    Mesh meshFromIndexed(std::vector<glm::vec3> positions, std::vector<glm::ivec3> faces) {
+    Mesh meshFromArrays(std::vector<glm::vec3> positions, std::vector<glm::ivec3> faces) {
         Mesh mesh;
         mesh.vertices.reserve(positions.size());
         for (glm::vec3 p : positions) {
