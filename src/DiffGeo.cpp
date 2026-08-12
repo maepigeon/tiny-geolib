@@ -12,7 +12,7 @@ namespace tinyGeo {
     std::vector<std::vector<std::pair<int, float>>> cotanLaplacian(HalfEdgeMesh mesh) {
         buildVertexToHEvector(mesh);
         int numVertices = mesh.positions.size();
-        std::vector<std::tuple<int, float, std::vector<std::pair<int, float>>>> result;
+        std::vector< std::vector<std::pair<int, float>>> result;
         result.reserve(numVertices);
         for (int i = 0; i < numVertices; i++) {
             float vertexSum = 1e-8;
@@ -27,8 +27,7 @@ namespace tinyGeo {
                 std::pair<int, float> connection = {he_i, -laplacian_v_weight};
                 connectionsToVertex.push_back(connection);
             }
-            std::tuple<int, float, std::vector<std::pair<int, float>>> vertexValues = {i, vertexSum, connectionsToVertex};
-            result.push_back(vertexValues);
+            result.push_back(connectionsToVertex);
         }
         return result;
     }
