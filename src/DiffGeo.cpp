@@ -19,12 +19,13 @@ namespace tinyGeo {
             std::vector<std::pair<int, float>> connectionsToVertex;
             for (int he_i : outgoingHalfEdges(mesh, mesh.vertexToHE[i])) {
                 HalfEdge he = mesh.halfEdges[he_i];
+                int neighborVertex = mesh.halfEdges[he.next].origin;  
                 float laplacian_v_weight = 0.5f * cotan(mesh, he_i);
                 if (he.twin >= 0) {
                    laplacian_v_weight += 0.5f * cotan(mesh, he.twin);
                 }
                 vertexSum += laplacian_v_weight;
-                std::pair<int, float> connection = {he_i, -laplacian_v_weight};
+                std::pair<int, float> connection = {neighborVertex, -laplacian_v_weight};
                 connectionsToVertex.push_back(connection);
             }
             result.push_back(connectionsToVertex);

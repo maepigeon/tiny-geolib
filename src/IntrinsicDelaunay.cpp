@@ -39,7 +39,6 @@ namespace tinyGeo {
         float area0 = triangleArea(e0, e1, e2);   // face 0 (v0,v1,v2) 
         float area1 = triangleArea(e0, e4, e5);   // face 1 (v1,v0,v3)
         if (area0 <= 0.0f || area1 <= 0.0f) {
-            std::cout << "did not flip edge, would be degenerate" << std::endl;
             return true; // degenerate: don't flip
         }
         float cot2 = cotFromLengths(e0, e1, e2);  // cot of angle at v2
