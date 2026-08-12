@@ -9,7 +9,7 @@ namespace tinyGeo {
     // Builds a positive-definite laplacian from the input set
     // The outer pair holds diagonal value, and the a vector of the following:
     // Result is Per-vertex [ordered by vertex index] list of adjacent std::pair<vertex, weight>
-    std::vector<std::tuple<int, float, std::vector<std::pair<int, float>>>> cotanLaplacian(HalfEdgeMesh mesh) {
+    std::vector<std::vector<std::pair<int, float>>> cotanLaplacian(HalfEdgeMesh mesh) {
         buildVertexToHEvector(mesh);
         int numVertices = mesh.positions.size();
         std::vector<std::tuple<int, float, std::vector<std::pair<int, float>>>> result;
