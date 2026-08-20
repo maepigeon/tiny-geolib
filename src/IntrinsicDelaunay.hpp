@@ -4,6 +4,7 @@
 #include "Mesh.hpp"
 #include "Geometry.hpp"
 namespace tinyGeo {
+    float cotFromLengths(float opp, float a, float b);
     bool isLocallyDelaunay(HalfEdgeMesh& mesh, int he0);
     float flippedEdgeLength(HalfEdgeMesh& mesh, int halfEdgeToFlip);
     void flipEdgeIntrinsic(HalfEdgeMesh& mesh, int he0);

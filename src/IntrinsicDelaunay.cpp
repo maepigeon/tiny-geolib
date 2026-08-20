@@ -9,8 +9,6 @@
 #include "HalfEdge.hpp"
 
 namespace tinyGeo {
-
-
     float cotFromLengths(float opp, float a, float b) {
         float area = triangleArea(opp, a, b);
         if (area <= 0.0f) {

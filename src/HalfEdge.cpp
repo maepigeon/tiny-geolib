@@ -1,4 +1,5 @@
 #include "HalfEdge.hpp"
+#include "IntrinsicDelaunay.hpp"
 #include <map>
 #include <utility>
 #include <cstdio>
@@ -21,12 +22,7 @@ namespace tinyGeo {
         int v0i = he;
         int v1i = mesh.halfEdges[v0i].next;
         int v2i = mesh.halfEdges[v1i].next;
-        glm::vec3 v0 = mesh.positions[mesh.halfEdges[v0i].origin];
-        glm::vec3 v1 = mesh.positions[mesh.halfEdges[v1i].origin];
-        glm::vec3 v2 = mesh.positions[mesh.halfEdges[v2i].origin];
-        glm::vec3 v2v0 = v0 - v2;
-        glm::vec3 v2v1 = v1 - v2;
-        return glm::dot(v2v0, v2v1) / glm::length(glm::cross(v2v0, v2v1));
+        return tinyGeo::cotFromLengths(mesh.halfEdges[v0i].length, mesh.halfEdges[v1i].length, mesh.halfEdges[v2i].length);
     }
 
     void calculateEdgeLengths(HalfEdgeMesh& he) {

@@ -11,7 +11,7 @@ namespace tinyGeo {
         int twin; // the opposite direction half-edge
         int next;
         int face; // triangle that this half-edge is in
-        double length;
+        float length;
     };
     struct HalfEdgeMesh {
         std::vector<glm::vec3> positions;
