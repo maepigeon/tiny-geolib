@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.10)
-set(ProjectName tiny-geolib)
-project(${ProjectName})
-
+cmake_minimum_required(VERSION 3.20) #cpp23 requires cmake v3.20 or higher
+project(tiny-geolib)
+# Use the C++23 standard.
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 include(FetchContent)
 
 find_package(glm CONFIG QUIET)
@@ -15,16 +16,16 @@ if(NOT glm_FOUND)
     )
     FetchContent_MakeAvailable(glm)
 endif()
-
-set(SOURCES
+add_library(tiny-geolib STATIC
     src/Mesh.cpp
     src/HalfEdge.cpp
     src/Geometry.cpp
     src/DiffGeo.cpp
     src/IntrinsicDelaunay.cpp
 )
-
-add_library(${ProjectName} STATIC ${SOURCES})
-target_compile_features(${ProjectName} PUBLIC cxx_std_23)
-target_link_libraries(${ProjectName} PUBLIC glm::glm)
-target_include_directories(${ProjectName} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_compile_features(tiny-geolib PUBLIC cxx_std_23)
+target_link_libraries(tiny-geolib PUBLIC glm::glm)
+target_include_directories(
+    tiny-geolib PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
