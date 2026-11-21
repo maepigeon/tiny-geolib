@@ -1,5 +1,5 @@
-#ifndef TINYGEO_MESH
-#define TINYGEO_MESH
+#ifndef TINYGEO_MESH_HPP
+#define TINYGEO_MESH_HPP
 #include <glm/glm.hpp>
 #include <vector>
 #include <cstdint>

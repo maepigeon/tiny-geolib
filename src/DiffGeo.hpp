@@ -1,5 +1,5 @@
-#ifndef TINYGEO_DIFFGEO
-#define TINYGEO_DIFFGEO
+#ifndef TINYGEO_DIFFGEO_HPP
+#define TINYGEO_DIFFGEO_HPP
 #include "HalfEdge.hpp"
 #include <vector>
 #include <tuple>

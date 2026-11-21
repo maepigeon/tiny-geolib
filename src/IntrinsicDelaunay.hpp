@@ -1,5 +1,5 @@
-#ifndef INTRINSIC_DELAUNAY
-#define INTRINSIC_DELAUNAY
+#ifndef TINYGEO_INTRINSIC_DELAUNAY_HPP
+#define TINYGEO_INTRINSIC_DELAUNAY_HPP
 #include "HalfEdge.hpp"
 #include "Mesh.hpp"
 #include "Geometry.hpp"

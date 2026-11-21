@@ -1,5 +1,5 @@
-#ifndef TINYGEO_GEOMETRY
-#define TINYGEO_GEOMETRY
+#ifndef TINYGEO_GEOMETRY_HPP
+#define TINYGEO_GEOMETRY_HPP
 #include "Mesh.hpp"
 #include "HalfEdge.hpp"
 #include <vector>
