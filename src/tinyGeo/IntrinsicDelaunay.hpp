@@ -1,8 +1,8 @@
 #ifndef TINYGEO_INTRINSIC_DELAUNAY_HPP
 #define TINYGEO_INTRINSIC_DELAUNAY_HPP
-#include "HalfEdge.hpp"
-#include "Mesh.hpp"
-#include "Geometry.hpp"
+#include <tinyGeo/HalfEdge.hpp>
+#include <tinyGeo/Mesh.hpp>
+#include <tinyGeo/Geometry.hpp>
 namespace tinyGeo {
     float cotFromLengths(float opp, float a, float b);
     bool isLocallyDelaunay(HalfEdgeMesh& mesh, int he0);

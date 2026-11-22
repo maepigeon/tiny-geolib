@@ -1,6 +1,6 @@
 #ifndef TINYGEO_HALFEDGE_HPP
 #define TINYGEO_HALFEDGE_HPP
-#include "Mesh.hpp"
+#include <tinyGeo/Mesh.hpp>
 #include <glm/glm.hpp>
 #include <vector>
 #include <cstdint>

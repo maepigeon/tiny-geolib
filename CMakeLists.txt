@@ -17,11 +17,11 @@ if(NOT glm_FOUND)
     FetchContent_MakeAvailable(glm)
 endif()
 add_library(tiny-geolib STATIC
-    src/Mesh.cpp
-    src/HalfEdge.cpp
-    src/Geometry.cpp
-    src/DiffGeo.cpp
-    src/IntrinsicDelaunay.cpp
+    src/tinyGeo/Mesh.cpp
+    src/tinyGeo/HalfEdge.cpp
+    src/tinyGeo/Geometry.cpp
+    src/tinyGeo/DiffGeo.cpp
+    src/tinyGeo/IntrinsicDelaunay.cpp
 )
 target_compile_features(tiny-geolib PUBLIC cxx_std_23)
 target_link_libraries(tiny-geolib PUBLIC glm::glm)

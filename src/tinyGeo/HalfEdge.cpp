@@ -1,9 +1,9 @@
-#include "HalfEdge.hpp"
-#include "IntrinsicDelaunay.hpp"
+#include <tinyGeo/HalfEdge.hpp>
+#include <tinyGeo/IntrinsicDelaunay.hpp>
 #include <map>
 #include <utility>
 #include <cstdio>
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <iostream>
 
 namespace tinyGeo {

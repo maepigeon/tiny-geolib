@@ -1,6 +1,6 @@
 #ifndef TINYGEO_DIFFGEO_HPP
 #define TINYGEO_DIFFGEO_HPP
-#include "HalfEdge.hpp"
+#include <tinyGeo/HalfEdge.hpp>
 #include <vector>
 #include <tuple>
 namespace tinyGeo {

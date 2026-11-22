@@ -1,4 +1,4 @@
-#include "Geometry.hpp"
+#include <tinyGeo/Geometry.hpp>
 namespace tinyGeo {
     // Area of a triangle from its 3 edge lengths Kahan (stable) Heron) https://en.wikipedia.org/wiki/Heron%27s_formula
     float triangleArea(float l0, float l1, float l2) {

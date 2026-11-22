@@ -1,8 +1,8 @@
-#include "Mesh.hpp"
+#include <tinyGeo/Mesh.hpp>
 #include <map>
 #include <tuple>
 #include <cmath>
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
 namespace tinyGeo {
     Mesh meshFromArrays(std::vector<glm::vec3> positions, std::vector<glm::ivec3> faces) {

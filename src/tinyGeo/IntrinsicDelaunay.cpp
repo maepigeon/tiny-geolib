@@ -3,10 +3,10 @@
 #include <vector>
 #include <utility>
 #include <iostream>
-#include "IntrinsicDelaunay.hpp"
-#include "HalfEdge.hpp"
-#include "Mesh.hpp"
-#include "HalfEdge.hpp"
+#include <tinyGeo/IntrinsicDelaunay.hpp>
+#include <tinyGeo/HalfEdge.hpp>
+#include <tinyGeo/Mesh.hpp>
+#include <tinyGeo/HalfEdge.hpp>
 
 namespace tinyGeo {
     float cotFromLengths(float opp, float a, float b) {

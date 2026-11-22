@@ -1,7 +1,7 @@
 #ifndef TINYGEO_GEOMETRY_HPP
 #define TINYGEO_GEOMETRY_HPP
-#include "Mesh.hpp"
-#include "HalfEdge.hpp"
+#include <tinyGeo/Mesh.hpp>
+#include <tinyGeo/HalfEdge.hpp>
 #include <vector>
 namespace tinyGeo {
     float triangleArea(float l0, float l1, float l2);

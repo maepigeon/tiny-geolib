@@ -1,8 +1,8 @@
-#include "DiffGeo.hpp"
+#include <tinyGeo/DiffGeo.hpp>
 #include <vector>
 #include <utility>
-#include "Geometry.hpp"
-#include "HalfEdge.hpp"
+#include <tinyGeo/Geometry.hpp>
+#include <tinyGeo/HalfEdge.hpp>
 
 
 namespace tinyGeo {
